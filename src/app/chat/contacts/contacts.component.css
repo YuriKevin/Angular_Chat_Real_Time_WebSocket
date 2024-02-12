@@ -1,0 +1,131 @@
+.search{
+    width: 100%;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search div{
+    width: 50%;
+    display: block;
+    align-items:center;
+    justify-content: center;
+}
+.search div div{
+    display: flex;
+    width: 100%;
+    height: 40px;
+    background-color: white;
+
+}
+.search div div img{
+    height: 40px;
+    cursor: pointer;
+}
+.search h3{
+    margin-left: 25px;
+}
+.search textarea{
+    width: 92%;
+    height: 25px;
+    padding: 5px;
+    font-size: 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.contacts{
+    width: 100%;
+    height: 500px;
+    display:flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.contact{
+    width: 100%;
+    height: 11%;
+    background-color:white;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 2px;
+}
+.contacts .center{
+    width: 50%;
+    height: 90%;
+    overflow-x: auto;
+}
+.contact .delete{
+    width: 12%;
+    height: 100%;
+    background-color: brown;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.contact .delete:hover{
+    background-color: rgb(187, 52, 52);
+}
+.contact .user{
+    background-color: aliceblue;
+    width: 76%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contact .user:hover{
+    background-color: rgb(170, 170, 170);
+}
+.contact .edit{
+    width: 12%;
+    height: 100%;
+    background-color: rgb(42, 165, 122);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contact .edit:hover{
+    background-color: rgb(52, 192, 143);
+}
+.contact .edit img{
+    height: 70%;
+}
+
+.contact .user .image{
+    width: auto;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    height: 100%;
+}
+.contact .user .image img{
+    height: 90%;
+    width: auto;
+}
+.contact .user .name{
+    height: 70%;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+.contact .user .telephone{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+.name-telephone{
+    max-width: 70%;
+    width: auto;
+    height: 100%;
+
+    display: block;
+    align-items:center;
+    justify-content: center;
+}

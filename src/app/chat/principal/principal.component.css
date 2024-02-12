@@ -245,3 +245,6 @@ header{
 .title h1{
     margin-left: -10%;
 }
+textarea{
+    resize: none;
+}
