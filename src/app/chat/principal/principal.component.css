@@ -3,12 +3,12 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 .container {
-    width: 100vw; /* 100% da largura da viewport */
-    height: 100vh; /* 100% da altura da viewport */
-    display: flex; /* Utilizando flexbox */
-    justify-content: center; /* Centralizando horizontalmente */
-    align-items: center; /* Centralizando verticalmente */
-    background-color:black;
+    width: 100vw;
+    height: 100vh;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color:rgb(151, 211, 230);
     margin: 0;
 }
 .main{
