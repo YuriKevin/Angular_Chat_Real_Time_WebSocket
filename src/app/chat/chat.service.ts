@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Stomp } from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 import { Message } from './message';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Message } from './message';
 export class ChatService {
 
   private stompClient: any;
+  private messageSubject: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
 
   initConnectionSocket(){
     const url = '//localhost:8080/chat-socket'
@@ -20,13 +22,19 @@ export class ChatService {
     this.stompClient.connect({}, ()=>{
       this.stompClient.subscribe(`/topic/${roomId}`, (messages:any) =>{
         const messageContent = JSON.parse(messages.body);
-        console.log(messageContent);
+        const currentMessage = this.messageSubject.getValue();
+        currentMessage.push(messageContent);
+        this.messageSubject.next(currentMessage);
       })
     })
   }
 
   sendMessage(roomId: string, message:Message){
     this.stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify(message))
+  }
+
+  getMessageSubject(){
+    return this.messageSubject.asObservable();
   }
 
   constructor() {
