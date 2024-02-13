@@ -41,36 +41,9 @@
                 </div>
                 <div class="chat">
                     <div class="messages">
-                        <div class="message-width friend">
+                        <div class="message-width" *ngFor="let item of messageList" [ngClass]="{ 'your': item.message_user === 'your', 'friend' : item.message_user === 'friend' }">
                             <div class="chat-message">
-                                <p>This is an people chat message ola olaaa222 saddsa</p>
-                                <div class="time2">
-                                    <h6>00:00</h6>
-                                    <div class="circle green"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="message-width your">
-                            <div class="chat-message ">
-                                <p>This is an your chat message</p>
-                                <div class="time2">
-                                    <h6>00:00</h6>
-                                    <div class="circle green"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="message-width your">
-                            <div class="chat-message ">
-                                <p>This is an your chat message</p>
-                                <div class="time2">
-                                    <h6>00:00</h6>
-                                    <div class="circle green"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="message-width friend">
-                            <div class="chat-message ">
-                                <p>This is an people chat message ola olaaa222 saddsa</p>
+                                <p>{{item.message}}</p>
                                 <div class="time2">
                                     <h6>00:00</h6>
                                     <div class="circle green"></div>
@@ -80,8 +53,8 @@
                     </div>
                     <div class="keyboard">
                         <div>
-                            <textarea rows="4" maxlength="500"></textarea>
-                            <div class="send" (click)="sendMessage()">
+                            <textarea rows="4" maxlength="500" [(ngModel)]="text" (keyup.enter)="sendMessage()"></textarea>
+                            <div class="send" (click)="sendMessage()" >
                                 <img src="../../../assets/images/send.png" alt="enviar">
                             </div>
                         </div>
