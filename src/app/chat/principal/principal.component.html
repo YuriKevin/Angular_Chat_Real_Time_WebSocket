@@ -20,16 +20,16 @@
             </header>
             <div class="conversations-chat">
                 <div class="conversations">
-                    <div class="talk hover">
+                    <div class="talk hover" *ngFor="let contact of contacts">
                         <div class="image">
                             <img class="profile-pic" src="https://avatars.githubusercontent.com/u/91747141?v=4" alt="">
                         </div>
                         <div class="name-mensage">
                             <div class="name">
-                                <h2>Yuri</h2>
+                                <h2>{{contact.nickname}}</h2>
                             </div>
                             <div class="mensage">
-                                <h4>Hi, there is...</h4>
+                                <h4>{{contact.status}}</h4>
                                 <div class="circle green"></div>
                             </div>
                             <div class="time">
@@ -53,8 +53,8 @@
                     </div>
                     <div class="keyboard">
                         <div>
-                            <textarea rows="4" maxlength="500" [(ngModel)]="text" (keyup.enter)="sendMessage()"></textarea>
-                            <div class="send" (click)="sendMessage()" >
+                            <textarea rows="4" maxlength="500" [(ngModel)]="text" (keyup.enter)="sendMessage(44444444444)"></textarea>
+                            <div class="send" (click)="sendMessage(44444444444)" >
                                 <img src="../../../assets/images/send.png" alt="enviar">
                             </div>
                         </div>

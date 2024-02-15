@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { Message } from '../message';
 import { isNgTemplate } from '@angular/compiler';
+import { Contact } from '../contact';
+import { User } from '../user';
 
 @Component({
   selector: 'app-principal',
@@ -10,25 +12,29 @@ import { isNgTemplate } from '@angular/compiler';
 })
 export class PrincipalComponent implements OnInit{
   text: string = '';
-  userId: number = 1;
+  user!: User;
   messageList: any[] = [];
+  contacts:Contact[] = [];
+  userId!: number;
 
   constructor(private chatService:ChatService){
 
   }
 
   ngOnInit(): void {
-      this.chatService.joinRoom("ABC");
-      this.receivedMessage();
+      this.user = this.chatService.getUser();
+      this.contacts = this.chatService.getContacts();
+      this.chatService.joinRoom(44444444444/*this.user.telephone*/);
+      this.receivedMessage(); 
   }
 
-  sendMessage(){
+  sendMessage(friendTelephone:number){
     this.text = this.text.replace(/\n/g, '');
     const message = {
       message: this.text,
       user: 1
     } as Message
-    this.chatService.sendMessage("ABC", message)
+    this.chatService.sendMessage(friendTelephone, message)
     this.text = '';
     console.log(message.user === this.userId ? 'your' : 'friend')
   }
