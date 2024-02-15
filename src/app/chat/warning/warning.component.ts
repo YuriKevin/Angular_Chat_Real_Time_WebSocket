@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./warning.component.css']
 })
 export class WarningComponent {
-
 }
