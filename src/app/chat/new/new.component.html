@@ -18,7 +18,7 @@
                             <h3>Nome</h3>
                         </div>
                         <div>
-                            <input class="new-input" type="text">
+                            <input class="new-input" type="text" [(ngModel)]="nickname">
                         </div>
                     </div>
                     <div class="number">
@@ -26,11 +26,11 @@
                             <h3>Número</h3>
                         </div>
                         <div>
-                            <input class="new-input" type="number">
+                            <input class="new-input" type="number" [(ngModel)]="telephone">
                         </div>
                     </div>
              
-                        <button>Adicionar</button>
+                        <button (click)="addContact()">Adicionar</button>
                  
                 </div>
             </div>
