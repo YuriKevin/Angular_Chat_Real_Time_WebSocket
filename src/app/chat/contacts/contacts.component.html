@@ -15,35 +15,22 @@
                 <div>
                     <h3>Pesquisar</h3>
                     <div>
-                        <textarea cols="1" rows="1"></textarea>
-                        <img src="../../../assets/images/search.png" alt="">
+                        <input [(ngModel)]="text" (keyup.enter)="search()">
+                        <img src="../../../assets/images/search.png" alt="" (click)="search()">
                     </div>
                 </div>
             </div>
             <div class="contacts">
                 <div class="center">
-                    <div class="contact">
-                        <div class="delete"><h1>X</h1></div>
-                        <div class="user">
+                    <div class="contact" *ngFor="let item of searchResults">
+                        <div class="delete" (click)="deleteContact(item.id)"><h1>X</h1></div>
+                        <div class="user" [routerLink]="['/profile/', item.id]">
                             <div class="image">
-                                <img class="profile-pic" src="https://avatars.githubusercontent.com/u/91747141?v=4" alt="">
+                                <img class="profile-pic" src="{{item.photo}}" alt="">
                             </div>
                             <div class="name-telephone">
-                                <div class="name"><h3>Yuri</h3></div>
-                                <div class="telephone"><h5>77 99999-8888</h5></div>
-                            </div>
-                        </div>
-                        <div class="edit"><img src="../../../assets/images/edit.png" alt=""></div>
-                    </div>
-                    <div class="contact">
-                        <div class="delete"><h1>X</h1></div>
-                        <div class="user">
-                            <div class="image">
-                                <img class="profile-pic" src="https://avatars.githubusercontent.com/u/91747141?v=4" alt="">
-                            </div>
-                            <div class="name-telephone">
-                                <div class="name"><h3>Yuri</h3></div>
-                                <div class="telephone"><h5>77 99999-8888</h5></div>
+                                <div class="name"><h3>{{item.nickname}}</h3></div>
+                                <div class="telephone"><h5>{{item.telephone}}</h5></div>
                             </div>
                         </div>
                         <div class="edit"><img src="../../../assets/images/edit.png" alt=""></div>
