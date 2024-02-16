@@ -9,6 +9,7 @@ import { NewComponent } from './new/new.component';
 import { FormsModule } from '@angular/forms';
 import { WarningComponent } from './warning/warning.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     ProfileComponent,
     ContactsComponent,
     NewComponent,
-    WarningComponent
+    WarningComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
