@@ -25,7 +25,7 @@
 .search h3{
     margin-left: 25px;
 }
-.search textarea{
+.search input{
     width: 92%;
     height: 25px;
     padding: 5px;
