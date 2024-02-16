@@ -1,0 +1,34 @@
+.login-box{
+    width: 100%;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.block-box{
+    width: 40%;
+    height: 30%;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    background-color: #3B78BF;
+    border-radius: 20px;
+}
+.block-box div{
+    height: 40%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+}
+.big{
+    height: 60%;
+}
+.login-box input{
+    width: 60%;
+    height: 70%;
+    text-align: center;
+    font-size: 30px;
+}
