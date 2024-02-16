@@ -4,44 +4,49 @@
             <header>
                 <div class="shortcuts">
                 <div [routerLink]="['/profile']" class="hover">
-                    <img src="../../../assets/images/config.png" alt="">
+                    <img src="../../../assets/images/config.png" alt="Config Icon">
                 </div>
                 <div [routerLink]="['/contacts']" class="hover">
-                    <img src="../../../assets/images/contact.png" alt="">
+                    <img src="../../../assets/images/contact.png" alt="Contacts Icon">
                 </div>
                 <div [routerLink]="['/new']" class="hover">
-                    <img src="../../../assets/images/new.png" alt="">
+                    <img src="../../../assets/images/new.png" alt="Add Icon">
                 </div>
                 </div>
-                <div class="chat-info hover">
-                    <img class="profile-pic" src="https://avatars.githubusercontent.com/u/91747141?v=4" alt="">
-                    <h1>Yuri</h1>
+                <div class="chat-info hover" *ngIf="!chatConversation">
+                    <h1>Seja bem vindo ao Texter</h1>
+                </div>
+                <div class="chat-info hover" *ngIf="chatConversation" [routerLink]="['/profile', chatConversation.contact.id]">
+                    <img class="profile-pic" *ngIf="chatConversation && chatConversation.contact.photo" src="{{chatConversation.contact.photo}}" alt="Contact Image">
+                    <img class="profile-pic" *ngIf="chatConversation && !chatConversation.contact.photo" src="../../../assets/images/user.png" alt="Contact Image">
+                    <h1 >{{chatConversation.contact.nickname}}</h1>
                 </div>
             </header>
             <div class="conversations-chat">
                 <div class="conversations">
-                    <div class="talk hover" *ngFor="let contact of contacts">
+                    <div class="talk hover" *ngFor="let item of conversations" (click)="selectChatConversation(item)">
                         <div class="image">
-                            <img class="profile-pic" src="https://avatars.githubusercontent.com/u/91747141?v=4" alt="">
+                            <img *ngIf="item.contact.photo" class="profile-pic" src="{{item.contact.photo}}" alt="">
+                            <img *ngIf="!item.contact.photo" class="profile-pic" src="../../../assets/images/user.png" alt="">
                         </div>
                         <div class="name-mensage">
                             <div class="name">
-                                <h2>{{contact.nickname}}</h2>
+                                <h2>{{item.contact.nickname}}</h2>
                             </div>
                             <div class="mensage">
-                                <h4>{{contact.status}}</h4>
-                                <div class="circle green"></div>
+                                <h4>última mensagem</h4>
+                                <div class="circle blue"></div>
                             </div>
                             <div class="time">
-                                <h6>00:00</h6>
-                                <div class="circle blue"></div>
+                                <h6>Online</h6>
+                                <div class="circle green"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="chat">
                     <div class="messages">
-                        <div class="message-width" *ngFor="let item of messageList" [ngClass]="{ 'your': item.message_user === 'your', 'friend' : item.message_user === 'friend' }">
+                        <div class="message-width" *ngFor="let item of chatConversation.messages" [ngClass]="{ 'your': item.user == user.telephone, 'friend' : item.user == chatConversation.contact.telephone}">
                             <div class="chat-message">
                                 <p>{{item.message}}</p>
                                 <div class="time2">
@@ -53,8 +58,8 @@
                     </div>
                     <div class="keyboard">
                         <div>
-                            <textarea rows="4" maxlength="500" [(ngModel)]="text" (keyup.enter)="sendMessage(44444444444)"></textarea>
-                            <div class="send" (click)="sendMessage(44444444444)" >
+                            <textarea rows="4" maxlength="500" [(ngModel)]="text" (keyup.enter)="chatConversation.contact.telephone"></textarea>
+                            <div class="send" (click)="sendMessage(chatConversation.contact.telephone)" >
                                 <img src="../../../assets/images/send.png" alt="enviar">
                             </div>
                         </div>
