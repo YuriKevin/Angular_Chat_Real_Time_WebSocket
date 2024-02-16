@@ -1,1 +1,65 @@
 
+.black {
+    position: fixed; /* Define a posição fixa */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Define a largura para ocupar toda a largura da tela */
+    height: 100vh; /* Define a altura para ocupar toda a altura da tela */
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 50; /* Define uma camada acima de outros elementos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  .white{
+    width: 300px;
+    height: 180px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    display: block;
+    overflow: hidden;
+  }
+  .warning{
+    width: 100%;
+    height: 70%;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .warning div{
+    height: 90%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .options{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .options > *{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .options > *:hover{
+    background-color: #9e9e9e;
+    cursor: pointer;
+  }
+  .cancel{
+    color: brown;
+    border-right: 1px solid black;
+  }
+  .continue{
+    color: #3B78BF;
+  }
