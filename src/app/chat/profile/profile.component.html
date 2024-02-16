@@ -4,7 +4,7 @@
             <header>
                 <div class="back hover">
                     <div [routerLink]="['']" class="hover">
-                        <img src="../../../assets/images/back.png" alt="">
+                        <img src="../../../assets/images/back.png" alt="Back Icon">
                     </div>
                 </div>
                 <div class="title">
@@ -12,23 +12,31 @@
                 </div>
             </header>
             <div class="profile">
-                <div class="number"><h1>77 99999-8888</h1></div>
-                <div class="image-profile">
-                    <img src="https://avatars.githubusercontent.com/u/91747141?v=4" alt="">
-                    <div class="edit"><h5>Editar</h5></div>
+                <div class="number">
+                    <h1 *ngIf="contact">{{contact.telephone}}</h1>
+                    <h1 *ngIf="userProfile">{{user.telephone}}</h1>
+                </div>
+                <div class="image-profile" >
+                    <img *ngIf="contact && contact.photo" src="{{contact.photo}}" alt="User Image">
+                    <img *ngIf="contact && !contact.photo" src="../../../assets/images/user.png" alt="User Image">
+                    <img *ngIf="userProfile && user.photo" src="{{user.photo}}" alt="User Image">
+                    <img *ngIf="userProfile && !user.photo" src="../../../assets/images/user.png" alt="User Image">
                 </div>
                 <div class="name-profile">
                     <div class="name">
-                        <h3>Yuri Kevin</h3>
+                        <h3 *ngIf="contact">{{contact.nickname}}</h3>
+                        <h3 *ngIf="userProfile">{{user.name}}</h3>
                     </div>
-                    <div class="edit"><h5>Editar</h5></div>
                 </div>
                 <div class="status-profile">
                     <div class="status">
-                        <p>Este é um status do seu perfil!</p>
+                        <p *ngIf="contact && contact.status">{{contact.status}}</p>
+                        <p *ngIf="contact && !contact.status">Olá! Estou utilizando Texter!</p>
+                        <p *ngIf="userProfile && user.status">{{user.status}}</p>
+                        <p *ngIf="userProfile && !user.status">Olá! Estou utilizando Texter!</p>
                     </div>
-                    <div class="edit"><h5>Editar</h5></div>
                 </div>
+                <div class="edit-box"><div class="edit"><h5>Editar Perfil</h5></div></div>
             </div>
         </div>
     </div>
