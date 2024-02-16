@@ -8,6 +8,7 @@ import { Observable, throwError } from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { catchError } from 'rxjs/operators';
 import { User } from './user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,18 +21,22 @@ export class ChatService {
   private user!:User;
   public contacts: Contact[] = [];
 
-  constructor(private httpClient: HttpClient) {
-    this.initConnectionSocket();
+  constructor(private httpClient: HttpClient, private router:Router) {
+    
 
-    this.loadUser(44444444444).subscribe((data: User) => {
+
+  }
+
+  login(telephone:number){
+    this.loadUser(telephone).subscribe((data: User) => {
       this.user = data;
       console.log(this.user);
       this.loadContacts().subscribe((data: Contact[]) => {
       this.contacts = data;
       console.log(data);
+      this.router.navigate(['']);
     });
     });
-
   }
 
   initConnectionSocket(){
@@ -95,6 +100,33 @@ export class ChatService {
     }
     getContacts(){
       return this.contacts;
+    }
+    getContact(id:number):Contact| undefined {
+      return this.contacts.find(contact => contact.id == id);
+    }
+
+    addContact(nickname: string, userAddedId: number): Observable<any> {
+      const userId = this.user.telephone;
+      return this.httpClient.post<any>(this.apiURL + 'contact', { userId, userAddedId, nickname });
+    }
+
+    addContactInArray(contact:Contact){
+      this.contacts.push(contact);
+    }
+
+    deleteContact(id: number): Observable<any> {
+      return this.httpClient.delete(this.apiURL + 'contact/' + id)
+        .pipe(
+            catchError(this.errorHandler)
+        );
+    }
+
+    deleteContactinArray(id:number){
+      const index = this.contacts.findIndex(contact => contact.id === id);
+
+      if (index !== -1) {
+        this.contacts.splice(index, 1);
+      }
     }
 
 }
