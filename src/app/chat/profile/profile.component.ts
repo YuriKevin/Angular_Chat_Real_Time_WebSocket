@@ -19,8 +19,6 @@ export class ProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute, private chatService:ChatService, private router:Router) { 
     this.user = this.chatService.getUser();
     this.id = this.route.snapshot.params['id'];
-
-   
   }
 
   ngOnInit(): void {
@@ -32,24 +30,6 @@ export class ProfileComponent implements OnInit {
       if(this.contact == undefined){
           this.router.navigate(['/profile']);
       }
-      /*else{
-        if(this.contact.status == null || this.contact.status == ""){
-          this.contact.status = "Olá! Estou utilizando Texter!";
-        }
-        if(this.contact.photo == null){
-          this.contact.photo = "../../../assets/images/user.png"
-        }
-      }
-      
-    }
-    else{
-      if(this.user.status == null || this.user.status == ""){
-        this.user.status = "Olá! Estou utilizando Texter!";
-      }
-      if(this.user.photo == null){
-        this.user.photo = "../../../assets/images/user.png"
-      }
-    }*/
     }
   }
 }
