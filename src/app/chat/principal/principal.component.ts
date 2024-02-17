@@ -54,6 +54,7 @@ export class PrincipalComponent implements OnInit{
 
   selectChatConversation(conversation:Conversation){
     this.chatConversation = conversation;
+    this.chatService.selectChatConversation(conversation);
   }
 }
 

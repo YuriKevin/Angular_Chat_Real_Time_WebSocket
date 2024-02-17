@@ -24,6 +24,7 @@ export class ChatService {
   private user!:User;
   public contacts: Contact[] = [];
   private conversations:Conversation[] = [];
+  chatConversation!:Conversation;
 
   constructor(private httpClient: HttpClient, private router:Router) {
     
@@ -65,7 +66,6 @@ export class ChatService {
     this.stompClient.connect({}, ()=>{
       this.stompClient.subscribe(`/topic/${roomId}`, (messages:any) =>{
         const messageContent = JSON.parse(messages.body);
-        const currentMessage = this.messageSubject.getValue();
         this.messageSubject.next(messageContent);
       })
     })
@@ -73,6 +73,9 @@ export class ChatService {
 
     sendMessage(roomId: number, message:Message){
       this.stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify(message))
+      const index = this.conversations.findIndex(conv => conv.contact.telephone === roomId);
+      const conversation = this.conversations.splice(index, 1)[0];
+      this.conversations.unshift(conversation);
     }
 
     getMessageSubject(){
@@ -81,10 +84,12 @@ export class ChatService {
 
     receivedMessage(){
       this.getMessageSubject().subscribe((message: any) => {
-            const conversation = this.conversations.find(conversation => conversation.contact.telephone == message.user);
+        const index = this.conversations.findIndex(conv => conv.contact.telephone === message.user);
+        const conversation = this.conversations.splice(index, 1)[0];
             if (conversation) {
               conversation.messages.push(message);
               conversation.lastMessage = message.message;
+              this.conversations.unshift(conversation);
             }
             else{
               this.anonymousContact(message.user).subscribe((data: Contact)=>{
@@ -193,6 +198,10 @@ export class ChatService {
         .pipe(
             catchError(this.errorHandler)
         );
+    }
+
+    selectChatConversation(conversation:Conversation){
+      this.chatConversation = conversation;
     }
 
 }
