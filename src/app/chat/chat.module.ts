@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { WarningComponent } from './warning/warning.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoginComponent } from './login/login.component';
     CommonModule,
     ChatRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
     
   ]
 })
