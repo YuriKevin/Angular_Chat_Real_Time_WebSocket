@@ -15,34 +15,29 @@ import { Router } from '@angular/router';
 export class PrincipalComponent implements OnInit{
   text: string = '';
   user!: User;
-  messageList: any[] = [];
   contacts:Contact[] = [];
-  userId!: number;
   chatConversation!:Conversation;
   conversations:Conversation[] = [];
 
-
   constructor(private chatService:ChatService, private router:Router){
-    
+
   }
 
   ngOnInit(): void {
+    if(!this.user){//primeiro if pra quando o ngOnInit for iniciado pela segunda ou demais vezez
       this.user = this.chatService.getUser();
       if(!this.user){
         this.router.navigate(['/login']);
       }
+    }
       this.contacts = this.chatService.getContacts();
-      
-      this.receivedMessage(); 
+      this.conversations = this.chatService.getConversations();
 
-      this.contacts.forEach(contact => {
-        const conversation: Conversation = {
-            contact: contact,
-            messages: [], 
-            lastMessage: ''
-        };
-        this.conversations.push(conversation);
-    });
+  }
+
+  ngOnDestroy(): void {
+    this.contacts = [];
+    this.conversations = [];
   }
 
   sendMessage(friendTelephone:number){
@@ -55,40 +50,6 @@ export class PrincipalComponent implements OnInit{
     this.chatConversation.lastMessage = message.message;
     this.chatService.sendMessage(friendTelephone, message);
     this.text = '';
-    console.log(message.user === this.userId ? 'your' : 'friend');
-  }
-
-  receivedMessage(){
-
-    this.chatService.getMessageSubject().subscribe((messages: any) => {
-      messages.forEach((item: Message) => {
-        if(this.chatConversation && item.user==this.chatConversation.contact.telephone){
-            console.log("funcionando1");
-            this.chatConversation.messages.push(item);
-            this.chatConversation.lastMessage = item.message;
-        }
-        else{
-          const conversation = this.conversations.find(conversation => conversation.contact.telephone == item.user);
-          if (conversation) {
-            conversation.messages.push(item);
-            console.log("funcionando2");
-            conversation.lastMessage = item.message;
-          }
-          else{
-            this.chatService.anonymousContact(item.user).subscribe((data: Contact)=>{
-              this.chatService.addContactInArray(data);
-              const conversation: Conversation = {
-                contact: data,
-                messages: [], 
-                lastMessage: ''
-              }
-              this.conversations.push(conversation);
-              conversation.messages.push(item);
-              })
-          }
-        }
-      });
-    });
   }
 
   selectChatConversation(conversation:Conversation){
