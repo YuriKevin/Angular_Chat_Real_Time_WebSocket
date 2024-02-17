@@ -23,7 +23,7 @@
                 </div>
             </header>
             <div class="conversations-chat">
-                <div class="conversations">
+                <div class="conversations" *ngIf="conversations">
                     <div class="talk hover" *ngFor="let item of conversations" (click)="selectChatConversation(item)">
                         <div class="image">
                             <img *ngIf="item.contact.photo" class="profile-pic" src="{{item.contact.photo}}" alt="">
@@ -34,7 +34,8 @@
                                 <h2>{{item.contact.nickname}}</h2>
                             </div>
                             <div class="mensage">
-                                <h4>última mensagem</h4>
+                                <h4 *ngIf="item.lastMessage">{{item.lastMessage}}</h4>
+                                <h4 *ngIf="!item.lastMessage">iniciar conversa</h4>
                                 <div class="circle blue"></div>
                             </div>
                             <div class="time">
@@ -45,7 +46,7 @@
                     </div>
                 </div>
                 <div class="chat">
-                    <div class="messages">
+                    <div class="messages" *ngIf="chatConversation && chatConversation.messages">
                         <div class="message-width" *ngFor="let item of chatConversation.messages" [ngClass]="{ 'your': item.user == user.telephone, 'friend' : item.user == chatConversation.contact.telephone}">
                             <div class="chat-message">
                                 <p>{{item.message}}</p>
@@ -56,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="keyboard">
+                    <div class="keyboard" *ngIf="chatConversation">
                         <div>
                             <textarea rows="4" maxlength="500" [(ngModel)]="text" (keyup.enter)="chatConversation.contact.telephone"></textarea>
                             <div class="send" (click)="sendMessage(chatConversation.contact.telephone)" >
