@@ -26,7 +26,9 @@
                         <div class="delete" (click)="deleteContact(item.id)"><h1>X</h1></div>
                         <div class="user" [routerLink]="['/profile/', item.id]">
                             <div class="image">
-                                <img class="profile-pic" src="{{item.photo}}" alt="">
+                                <img class="profile-pic" *ngIf="item.photo" src="{{item.photo}}" alt="">
+                                <img class="profile-pic" *ngIf="!item.photo" src="../../../assets/images/user.png" alt="Contact Image">
+                    
                             </div>
                             <div class="name-telephone">
                                 <div class="name"><h3>{{item.nickname}}</h3></div>
