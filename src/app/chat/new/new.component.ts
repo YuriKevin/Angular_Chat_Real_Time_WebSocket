@@ -18,7 +18,6 @@ export class NewComponent {
   addContact(): void {
     this.chatService.addContact(this.nickname, this.telephone).subscribe({
       next: (contact: Contact) => {
-        console.log('Contato adicionado com sucesso!');
         this.chatService.addContactInArray(contact);
       },
       error: (error) => {
