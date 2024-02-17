@@ -17,7 +17,9 @@ import { Conversation } from './conversation';
 export class ChatService {
 
   private stompClient: any;
-  private messageSubject: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
+  //private messageSubject: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
+  private messageSubject: BehaviorSubject<Message | null> = new BehaviorSubject<Message | null>(null);
+
   private apiURL = "http://localhost:8080/";
   private user!:User;
   public contacts: Contact[] = [];
@@ -35,11 +37,20 @@ export class ChatService {
       console.log(this.user);
       this.loadContacts().subscribe((data: Contact[]) => {
       this.contacts = data;
-      console.log(data);
+      if(this.contacts){
+        this.contacts.forEach(contact => {
+          const conversation: Conversation = {
+              contact: contact,
+              messages: [], 
+              lastMessage: ''
+          };
+          this.conversations.push(conversation);
+        });
+      }
       this.initConnectionSocket();
       this.joinRoom(this.user.telephone);
+      this.receivedMessage();
       this.router.navigate(['']);
-
     });
     });
   }
@@ -55,8 +66,7 @@ export class ChatService {
       this.stompClient.subscribe(`/topic/${roomId}`, (messages:any) =>{
         const messageContent = JSON.parse(messages.body);
         const currentMessage = this.messageSubject.getValue();
-        currentMessage.push(messageContent);
-        this.messageSubject.next(currentMessage);
+        this.messageSubject.next(messageContent);
       })
     })
   }
@@ -67,6 +77,28 @@ export class ChatService {
 
     getMessageSubject(){
       return this.messageSubject.asObservable();
+    }
+
+    receivedMessage(){
+      this.getMessageSubject().subscribe((message: any) => {
+            const conversation = this.conversations.find(conversation => conversation.contact.telephone == message.user);
+            if (conversation) {
+              conversation.messages.push(message);
+              conversation.lastMessage = message.message;
+            }
+            else{
+              this.anonymousContact(message.user).subscribe((data: Contact)=>{
+                this.addContactInArray(data);
+                const conversation: Conversation = {
+                  contact: data,
+                  messages: [], 
+                  lastMessage: ''
+                }
+                this.conversations.push(conversation);
+                conversation.messages.push(message);
+                })
+            }
+      });
     }
 
    
@@ -85,11 +117,13 @@ export class ChatService {
     }
 
     loadContacts(): Observable<any> {
-    return this.httpClient.get<Contact[]>(this.apiURL + 'contact/' + this.user.telephone)
+      return this.httpClient.get<Contact[]>(this.apiURL + 'contact/' + this.user.telephone)
         .pipe(
             catchError(this.errorHandler)
-        );
+        )
+        
     }
+
     errorHandler(error:any) {
       let errorMessage = '';
       if(error.error instanceof ErrorEvent) {
@@ -110,13 +144,26 @@ export class ChatService {
       return this.contacts.find(contact => contact.id == id);
     }
 
+    getConversations(){
+      return this.conversations
+    }
+
     addContact(nickname: string, userAddedId: number): Observable<any> {
       const userId = this.user.telephone;
       return this.httpClient.post<any>(this.apiURL + 'contact', { userId, userAddedId, nickname });
     }
 
     addContactInArray(contact:Contact){
+      if(!this.contacts){
+        this.contacts = [];
+      }
       this.contacts.push(contact);
+      const conversation: Conversation = {
+        contact: contact,
+        messages: [], 
+        lastMessage: ''
+      }
+      this.conversations.push(conversation);
     }
 
     deleteContact(id: number): Observable<any> {
@@ -132,6 +179,13 @@ export class ChatService {
       if (index !== -1) {
         this.contacts.splice(index, 1);
       }
+
+      const indexConversation = this.conversations.findIndex(conversation => conversation.contact.telephone === id);
+
+      if (indexConversation !== -1) {
+        this.contacts.splice(indexConversation, 1);
+      }
+
     }
 
     anonymousContact(anonymousTelephone: number): Observable<any> {
