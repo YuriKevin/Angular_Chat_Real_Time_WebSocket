@@ -9,6 +9,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { catchError } from 'rxjs/operators';
 import { User } from './user';
 import { Router } from '@angular/router';
+import { Conversation } from './conversation';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class ChatService {
   private apiURL = "http://localhost:8080/";
   private user!:User;
   public contacts: Contact[] = [];
+  private conversations:Conversation[] = [];
 
   constructor(private httpClient: HttpClient, private router:Router) {
     
@@ -34,7 +36,10 @@ export class ChatService {
       this.loadContacts().subscribe((data: Contact[]) => {
       this.contacts = data;
       console.log(data);
+      this.initConnectionSocket();
+      this.joinRoom(this.user.telephone);
       this.router.navigate(['']);
+
     });
     });
   }
@@ -127,6 +132,13 @@ export class ChatService {
       if (index !== -1) {
         this.contacts.splice(index, 1);
       }
+    }
+
+    anonymousContact(anonymousTelephone: number): Observable<any> {
+      return this.httpClient.get<Contact>(this.apiURL + 'contact/anonymous/' + anonymousTelephone)
+        .pipe(
+            catchError(this.errorHandler)
+        );
     }
 
 }
