@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'contacts', component: ContactsComponent},
   { path: 'new', component: NewComponent},
+  { path: 'new/:id', component: NewComponent },
   { path: 'login', component: LoginComponent},
   { path: 'warning', component: WarningComponent}
 ];
