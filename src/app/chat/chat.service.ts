@@ -22,9 +22,11 @@ export class ChatService {
 
   private apiURL = "http://localhost:8080/";
   private user!:User;
-  public contacts: Contact[] = [];
+  private contacts: Contact[] = [];
   private conversations:Conversation[] = [];
-  chatConversation!:Conversation;
+  private chatConversation!:Conversation;
+  private idLastMessgeUser!:number;
+
 
   constructor(private httpClient: HttpClient, private router:Router) {
     
@@ -71,11 +73,20 @@ export class ChatService {
     })
   }
 
-    sendMessage(roomId: number, message:Message){
+    sendMessage(roomId: number, text:string){
+      const message = {
+        message: text,
+        user: this.user.telephone
+      } as Message
+      this.chatConversation.messages.push(message);
+      this.chatConversation.lastMessage = message.message;
       this.stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify(message))
-      const index = this.conversations.findIndex(conv => conv.contact.telephone === roomId);
-      const conversation = this.conversations.splice(index, 1)[0];
-      this.conversations.unshift(conversation);
+      if(roomId !== this.idLastMessgeUser){
+        const index = this.conversations.findIndex(conv => conv.contact.telephone === roomId);
+        const conversation = this.conversations.splice(index, 1)[0];
+        this.conversations.unshift(conversation);
+        this.idLastMessgeUser = roomId;
+      }
     }
 
     getMessageSubject(){
@@ -84,25 +95,33 @@ export class ChatService {
 
     receivedMessage(){
       this.getMessageSubject().subscribe((message: any) => {
+        console.log(message);
+        if(this.chatConversation && message.user == this.chatConversation.contact.telephone){
+          this.chatConversation.messages.push(message);
+          this.chatConversation.lastMessage = message.message;
+        }
+        else{
         const index = this.conversations.findIndex(conv => conv.contact.telephone === message.user);
-        const conversation = this.conversations.splice(index, 1)[0];
-            if (conversation) {
+            if(index != -1) {
+              const conversation = this.conversations.splice(index, 1)[0];
               conversation.messages.push(message);
               conversation.lastMessage = message.message;
               this.conversations.unshift(conversation);
             }
             else{
               this.anonymousContact(message.user).subscribe((data: Contact)=>{
-                this.addContactInArray(data);
+                this.addContactInArray(data, true);
                 const conversation: Conversation = {
                   contact: data,
-                  messages: [], 
-                  lastMessage: ''
+                  messages: [message], 
+                  lastMessage: message.message
                 }
                 this.conversations.push(conversation);
-                conversation.messages.push(message);
+                //conversation.messages.push(message);
+                //conversation.lastMessage = message.message;
                 })
             }
+          }
       });
     }
 
@@ -145,8 +164,8 @@ export class ChatService {
     getContacts(){
       return this.contacts;
     }
-    getContact(id:number):Contact| undefined {
-      return this.contacts.find(contact => contact.id == id);
+    getContact(telephone:number):Contact| undefined {
+      return this.contacts.find(contact => contact.telephone == telephone);
     }
 
     getConversations(){
@@ -158,17 +177,22 @@ export class ChatService {
       return this.httpClient.post<any>(this.apiURL + 'contact', { userId, userAddedId, nickname });
     }
 
-    addContactInArray(contact:Contact){
+    addContactInArray(contact:Contact,anonymous:boolean){
       if(!this.contacts){
         this.contacts = [];
       }
+      if(anonymous==false){
       this.contacts.push(contact);
       const conversation: Conversation = {
         contact: contact,
         messages: [], 
         lastMessage: ''
       }
-      this.conversations.push(conversation);
+        this.conversations.push(conversation);
+      }
+      else{
+        this.contacts.push(contact);
+      }
     }
 
     deleteContact(id: number): Observable<any> {
@@ -202,6 +226,9 @@ export class ChatService {
 
     selectChatConversation(conversation:Conversation){
       this.chatConversation = conversation;
+    }
+    getChatConversation(){
+      return this.chatConversation;
     }
 
 }
