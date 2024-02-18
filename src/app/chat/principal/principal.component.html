@@ -16,7 +16,7 @@
                 <div class="chat-info hover" *ngIf="!chatConversation">
                     <h1>Seja bem vindo ao Texter</h1>
                 </div>
-                <div class="chat-info hover" *ngIf="chatConversation" [routerLink]="['/profile', chatConversation.contact.id]">
+                <div class="chat-info hover" *ngIf="chatConversation" [routerLink]="['/profile', chatConversation.contact.telephone]">
                     <img class="profile-pic" *ngIf="chatConversation && chatConversation.contact.photo" src="{{chatConversation.contact.photo}}" alt="Contact Image">
                     <img class="profile-pic" *ngIf="chatConversation && !chatConversation.contact.photo" src="../../../assets/images/user.png" alt="Contact Image">
                     <h1 >{{chatConversation.contact.nickname}}</h1>
@@ -47,6 +47,7 @@
                 </div>
                 <div class="chat">
                     <div class="messages" *ngIf="chatConversation && chatConversation.messages">
+                        <div *ngIf="chatConversation.contact.id==0" [routerLink]="['/new', chatConversation.contact.telephone]" class="not-contact"><p>Este usuário não é um de seus contatos. clique aqui para adicionar.</p></div>
                         <div class="message-width" *ngFor="let item of chatConversation.messages" [ngClass]="{ 'your': item.user == user.telephone, 'friend' : item.user == chatConversation.contact.telephone}">
                             <div class="chat-message">
                                 <p>{{item.message}}</p>
