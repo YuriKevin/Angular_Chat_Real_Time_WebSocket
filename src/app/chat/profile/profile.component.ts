@@ -17,11 +17,12 @@ export class ProfileComponent implements OnInit {
   contactProfile:boolean = false;
 
   constructor(private route: ActivatedRoute, private chatService:ChatService, private router:Router) { 
-    this.user = this.chatService.getUser();
-    this.id = this.route.snapshot.params['id'];
+    
   }
 
   ngOnInit(): void {
+    this.user = this.chatService.getUser();
+    this.id = this.route.snapshot.params['id'];
     if(this.id){
       this.userProfile = false;
       this.contactProfile = true;
