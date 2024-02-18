@@ -24,7 +24,7 @@ export class PrincipalComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    if(!this.user){//primeiro if pra quando o ngOnInit for iniciado pela segunda ou demais vezez
+    if(!this.user){//primeiro if pra quando o ngOnInit for iniciado pela segunda ou demais vezes
       this.user = this.chatService.getUser();
       if(!this.user){
         this.router.navigate(['/login']);
@@ -32,7 +32,9 @@ export class PrincipalComponent implements OnInit{
     }
       this.contacts = this.chatService.getContacts();
       this.conversations = this.chatService.getConversations();
-
+      if(!this.chatConversation){
+        this.chatConversation = this.chatService.getChatConversation();
+      }
   }
 
   ngOnDestroy(): void {
@@ -42,13 +44,7 @@ export class PrincipalComponent implements OnInit{
 
   sendMessage(friendTelephone:number){
     this.text = this.text.replace(/\n/g, '');
-    const message = {
-      message: this.text,
-      user: this.user.telephone
-    } as Message
-    this.chatConversation.messages.push(message);
-    this.chatConversation.lastMessage = message.message;
-    this.chatService.sendMessage(friendTelephone, message);
+    this.chatService.sendMessage(friendTelephone, this.text);
     this.text = '';
   }
 
