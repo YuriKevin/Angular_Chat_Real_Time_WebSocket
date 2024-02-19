@@ -78,3 +78,45 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  .ok{
+    color: #3B78BF;
+  }
+  .ok:hover{
+    background-color: #9e9e9e;
+    cursor: pointer;
+    
+  }
+  .write{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid black;
+  }
+
+  .write input{
+    width: 80%;
+    height: 90%;
+    font-size: 15px;
+    text-align: center;
+    border: none;
+    background-color: aliceblue;
+  }
+  .write input:focus {
+    outline: none;
+    box-shadow: none;
+    
+  }
+  .write button{
+    width: 20%;
+    height: 100%;
+    background-color: rgb(42, 165, 122);
+    color: white;
+    border: none;
+  }
+  .write button:hover{
+    background-color: rgb(51, 197, 146);
+    cursor: pointer;
+  }
