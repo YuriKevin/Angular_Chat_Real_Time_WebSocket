@@ -15,7 +15,7 @@
                         <input type="number" placeholder="Número" [(ngModel)]="telephone" (keyup.enter)="login()">
                     </div>
                     <div class="login-input">
-                        <input type="password" placeholder="Senha">
+                        <input type="password" placeholder="Senha" [(ngModel)]="password" (keyup.enter)="login()">
                     </div>
                     <div class="btn">
                         <button (click)="login()">Continue</button>
@@ -25,3 +25,4 @@
         </div>
     </div>
 </body>
+<app-warning></app-warning>
