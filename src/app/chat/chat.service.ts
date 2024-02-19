@@ -5,7 +5,7 @@ import { Message } from './message';
 import { Contact } from './contact';
 import { BehaviorSubject } from 'rxjs';
 import { Observable, throwError } from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http'
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http'
 import { catchError } from 'rxjs/operators';
 import { User } from './user';
 import { Router } from '@angular/router';
@@ -34,27 +34,35 @@ export class ChatService {
 
   }
 
-  login(telephone:number){
-    this.loadUser(telephone).subscribe((data: User) => {
-      this.user = data;
-      console.log(this.user);
-      this.loadContacts().subscribe((data: Contact[]) => {
-      this.contacts = data;
-      if(this.contacts){
-        this.contacts.forEach(contact => {
-          const conversation: Conversation = {
-              contact: contact,
-              messages: [], 
-              lastMessage: ''
-          };
-          this.conversations.push(conversation);
+  login(telephone: number, password:string): Observable<any> {
+    return new Observable((observer) => {
+      this.loadUser(telephone, password).subscribe((data: User) => {
+        this.user = data;
+        console.log(this.user);
+        this.loadContacts().subscribe((data: Contact[]) => {
+          this.contacts = data;
+          if (this.contacts) {
+            this.contacts.forEach(contact => {
+              const conversation: Conversation = {
+                contact: contact,
+                messages: [], 
+                lastMessage: ''
+              };
+              this.conversations.push(conversation);
+            });
+          }
+          this.initConnectionSocket();
+          this.joinRoom(this.user.telephone);
+          this.receivedMessage();
+          this.router.navigate(['']);
+          observer.next(); // Emite um valor vazio para indicar sucesso
+          observer.complete();
+        }, (error) => {
+          observer.error(error);
         });
-      }
-      this.initConnectionSocket();
-      this.joinRoom(this.user.telephone);
-      this.receivedMessage();
-      this.router.navigate(['']);
-    });
+      }, (error) => {
+        observer.error(error);
+      });
     });
   }
 
@@ -133,19 +141,38 @@ export class ChatService {
       })
     }
     
-    loadUser(telephone:number): Observable<any> {
-      return this.httpClient.get(this.apiURL + 'user/' + telephone)
-      .pipe(
-        catchError(this.errorHandler)
-      )
+    loadUser(telephone: number, password:string): Observable<any> {
+      const params = new HttpParams()
+        .set('telephone', telephone)
+        .set('password', password);
+      return this.httpClient.get(this.apiURL + 'user/login', { params })
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            if (error.status === 404) {
+              return throwError('Nenhum usuário encontrado');
+            } else if(error.status === 400) {
+              return throwError('Usuário ou senha incorretos');
+            }
+            else {
+              let errorMessage = 'Erro ao carregar usuário';
+              if (error.error instanceof ErrorEvent) {
+                errorMessage = `Erro no cliente: ${error.error.message}`;
+              } else {
+                errorMessage = `Erro no servidor, tente novamente mais tade.`;
+                errorMessage = `Erro no servidor, tente novamente mais tade: ${error.status}, `;
+              }
+              return throwError(errorMessage);
+            }
+          })
+        );
     }
+  
 
     loadContacts(): Observable<any> {
       return this.httpClient.get<Contact[]>(this.apiURL + 'contact/' + this.user.telephone)
         .pipe(
             catchError(this.errorHandler)
         )
-        
     }
 
     errorHandler(error:any) {
@@ -192,6 +219,26 @@ export class ChatService {
       }
       else{
         this.contacts.push(contact);
+      }
+    }
+
+    editContact(contact:Contact): Observable<any>{
+      return this.httpClient.put(this.apiURL + 'contact', JSON.stringify(contact), this.httpOptions)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 204) {
+            //a requisição put do back-end spring retorna um código 204, o angular pode encarar como error, então é só verificar se foi o código 204 e retorná-lo indicando que está correto o método
+            return throwError(204);
+          } else {
+            return this.errorHandler(error);
+          }
+        })
+      );
+    }
+    editContactInArray(contact:Contact){
+      const index = this.contacts.findIndex(item => item.id === contact.id);
+      if (index !== -1) {
+        this.contacts[index] = contact;
       }
     }
 
