@@ -21,13 +21,17 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = this.chatService.getUser();
+    if(!this.user){//primeiro if pra quando o ngOnInit for iniciado pela segunda ou demais vezes
+      this.user = this.chatService.getUser();
+      if(!this.user){
+        this.router.navigate(['/login']);
+      }
+    }
     this.id = this.route.snapshot.params['id'];
     if(this.id){
       this.userProfile = false;
       this.contactProfile = true;
       this.contact = this.chatService.getContact(this.id);
-      
       if(this.contact == undefined){
           this.router.navigate(['/profile']);
       }
