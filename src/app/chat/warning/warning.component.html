@@ -1,26 +1,23 @@
-<div class="black">
+ <div class="black" *ngIf="show">
     <div class="white">
         <div class="warning">
             <div>
-                <h3>Você tem certeza que deseja continuar?</h3>
+                <h3 *ngIf="warning">{{this.warning}}</h3>
             </div>
         </div>
-        <div class="black">
-            <div class="white">
-                <div class="warning">
-                    <div>
-                        <h3>Você tem certeza que deseja continuar?</h3>
-                    </div>
-                </div>
-                <div class="options">
-                    <div class="cancel">
-                        <h4>Cancel</h4>
-                    </div>
-                    <div class="continue">
-                        <h4>Continue</h4>
-                    </div>
-                </div>
+        <div class="options" *ngIf="options" (click)="close()">
+            <div class="cancel" (click)="cancel()">
+                <h4>Cancel</h4>
             </div>
+            <div class="continue" (click)="confirm()">
+                <h4>Confirm</h4>
+            </div>
+        </div>
+        <div class="loading" *ngIf="loading"></div>
+        <div class="options ok" *ngIf="ok" (click)="close()"><h4>ok</h4></div>
+        <div class="write" *ngIf="write" >
+            <input type="text" placeholder="Nickname:" [(ngModel)]="this.text" (keyup.enter)="writeEmit()">
+            <button (click)="writeEmit()">Confirm</button>
         </div>
     </div>
 </div>
