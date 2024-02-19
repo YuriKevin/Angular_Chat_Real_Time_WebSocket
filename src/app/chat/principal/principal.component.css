@@ -1,5 +1,6 @@
-body {
+body, html {
     margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 .container {
@@ -9,7 +10,6 @@ body {
     justify-content: center; 
     align-items: center; 
     background-color:#007FFD;
-    margin: 0;
 }
 .main{
     background-color: #D8ECFF;
