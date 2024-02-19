@@ -23,7 +23,7 @@
             <div class="contacts">
                 <div class="center">
                     <div class="contact" *ngFor="let item of searchResults">
-                        <div class="delete" (click)="deleteContact(item.id)"><h1>X</h1></div>
+                        <div class="delete" (click)="confirmDelete(item.id)"><h1>X</h1></div>
                         <div class="user" [routerLink]="['/profile/', item.telephone]">
                             <div class="image">
                                 <img class="profile-pic" *ngIf="item.photo" src="{{item.photo}}" alt="">
@@ -34,10 +34,11 @@
                                 <div class="telephone"><h5>{{item.telephone}}</h5></div>
                             </div>
                         </div>
-                        <div class="edit"><img src="../../../assets/images/edit.png" alt=""></div>
+                        <div class="edit" (click)="editContact(item)"><img src="../../../assets/images/edit.png" alt=""></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<app-warning></app-warning>
