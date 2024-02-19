@@ -1,13 +1,24 @@
 <body>
     <div class="container">
         <div class="main">
+            <div class="login-stripe">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
             <div class="login-box">
-                <div class="block-box">
-                    <div>
-                        <h3>Telefone 44444444444</h3>
+                <div>
+                    <div class="icon">
+                        <img src="../../../assets/images/user.png" alt="User Icon">
                     </div>
-                    <div class="big">
-                        <input type="number" [(ngModel)]="telephone" (keyup.enter)="login()">
+                    <div class="login-input">
+                        <input type="number" placeholder="Número" [(ngModel)]="telephone" (keyup.enter)="login()">
+                    </div>
+                    <div class="login-input">
+                        <input type="password" placeholder="Senha">
+                    </div>
+                    <div class="btn">
+                        <button (click)="login()">Continue</button>
                     </div>
                 </div>
             </div>
