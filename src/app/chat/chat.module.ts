@@ -11,6 +11,8 @@ import { WarningComponent } from './warning/warning.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { RouterModule } from '@angular/router';
     ContactsComponent,
     NewComponent,
     WarningComponent,
-    LoginComponent
+    LoginComponent,
+    SignUpComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,
