@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: 'new', component: NewComponent},
   { path: 'new/:id', component: NewComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'warning', component: WarningComponent},
   { path: 'login/success', component: LoginComponent},
   { path: 'signUp', component: SignUpComponent},
   { path: 'edit-profile', component: EditProfileComponent}
