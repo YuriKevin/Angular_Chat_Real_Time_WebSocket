@@ -12,13 +12,16 @@
                         <img src="../../../assets/images/user.png" alt="User Icon">
                     </div>
                     <div class="login-input">
-                        <input type="number" placeholder="Número" [(ngModel)]="telephone" (keyup.enter)="login()">
+                        <input type="number" placeholder="Número" [(ngModel)]="telephone">
                     </div>
                     <div class="login-input">
                         <input type="password" placeholder="Senha" [(ngModel)]="password" (keyup.enter)="login()">
                     </div>
                     <div class="btn">
                         <button (click)="login()">Continue</button>
+                    </div>
+                    <div class="btn">
+                        <p [routerLink]="['/signUp']">Sign Up</p>
                     </div>
                 </div>
             </div>
