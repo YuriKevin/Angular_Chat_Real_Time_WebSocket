@@ -6,6 +6,8 @@ import { ContactsComponent } from './chat/contacts/contacts.component';
 import { NewComponent } from './chat/new/new.component';
 import { LoginComponent } from './chat/login/login.component';
 import { WarningComponent } from './chat/warning/warning.component';
+import { SignUpComponent } from './chat/sign-up/sign-up.component';
+import { EditProfileComponent } from './chat/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: '', component: PrincipalComponent},
@@ -15,7 +17,10 @@ const routes: Routes = [
   { path: 'new', component: NewComponent},
   { path: 'new/:id', component: NewComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'warning', component: WarningComponent}
+  { path: 'warning', component: WarningComponent},
+  { path: 'login/success', component: LoginComponent},
+  { path: 'signUp', component: SignUpComponent},
+  { path: 'edit-profile', component: EditProfileComponent}
 ];
 
 @NgModule({
