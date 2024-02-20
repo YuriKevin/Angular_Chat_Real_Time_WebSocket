@@ -1,0 +1,50 @@
+<body>
+    <div class="container">
+        <div class="main">
+            <header>
+                <div class="back hover">
+                    <div [routerLink]="['']" class="hover">
+                        <img src="../../../assets/images/back.png" alt="Back Icon">
+                    </div>
+                </div>
+                <div class="title">
+                    <h1>Configurações</h1>
+                </div>
+            </header>
+            <div class="profile">
+                <div class="number">
+                 
+                </div>
+                <div class="image-profile">
+                    <div class="image-profile-image">
+                        <img src="{{this.photo}}" alt="">
+                    </div>
+                    <div class="image-profile-input">
+                        <label for="fileInput" class="custom-file-upload">
+                            Escolher arquivo
+                        </label>
+                        <input id="fileInput" type="file" (change)="handleFileInput($event)" hidden>
+                    </div>
+                </div>
+                <div class="name-profile">
+                    <div class="tittle-input">
+                        <h2>Name</h2>
+                    </div>
+                    <div class="input-input">
+                        <input type="text" maxlength="20" [(ngModel)]="name">
+                    </div>
+                </div>
+                <div class="status-profile">
+                    <div class="tittle-input">
+                        <h2>Status</h2>
+                    </div>
+                    <div class="input-input">
+                        <input type="text" maxlength="300" [(ngModel)]="status">
+                    </div>
+                </div>
+                <div class="edit-box"><div class="edit" (click)="editUser()"><h5>Confirm</h5></div></div>
+            </div>
+        </div>
+    </div>
+</body>
+<app-warning></app-warning>
