@@ -166,6 +166,37 @@ export class ChatService {
           })
         );
     }
+
+    signUp(telephone:number, password:string, name: string): Observable<any> {
+      return this.httpClient.post<any>(this.apiURL + 'user', { telephone, password, name })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'Erro desconhecido';
+          if (error.error instanceof ErrorEvent) {
+            // Erro do cliente
+            errorMessage = `Erro: ${error.error.message}`;
+          } else {
+            // Erro do servidor
+            errorMessage = error.error.message;
+          }
+          return throwError(errorMessage);
+        })
+      );
+  }
+
+  editUser(user:User): Observable<any>{
+    return this.httpClient.put(this.apiURL + 'user', JSON.stringify(user), this.httpOptions)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 204) {
+          //a requisição put do back-end spring retorna um código 204, o angular pode encarar como error, então é só verificar se foi o código 204 e retorná-lo indicando que está correto o método
+          return throwError(204);
+        } else {
+          return this.errorHandler(error);
+        }
+      })
+    );
+  }
   
 
     loadContacts(): Observable<any> {
