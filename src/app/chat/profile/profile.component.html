@@ -36,7 +36,7 @@
                         <p *ngIf="userProfile && !user.status">Olá! Estou utilizando Texter!</p>
                     </div>
                 </div>
-                <div class="edit-box"><div class="edit"><h5>Editar Perfil</h5></div></div>
+                <div class="edit-box"><div class="edit" [routerLink]="['/edit-profile']"><h5>Editar Perfil</h5></div></div>
             </div>
         </div>
     </div>
