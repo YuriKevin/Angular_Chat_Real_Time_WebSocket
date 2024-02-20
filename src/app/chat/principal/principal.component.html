@@ -34,7 +34,7 @@
                                 <h2>{{item.contact.nickname}}</h2>
                             </div>
                             <div class="mensage">
-                                <h4 *ngIf="item.lastMessage">{{item.lastMessage}}</h4>
+                                <h4 *ngIf="item.lastMessage">{{ item.lastMessage.length > 11 ? item.lastMessage.substring(0, 11) + '...' : item.lastMessage }}</h4>
                                 <h4 *ngIf="!item.lastMessage">iniciar conversa</h4>
                                 <div class="circle blue"></div>
                             </div>
