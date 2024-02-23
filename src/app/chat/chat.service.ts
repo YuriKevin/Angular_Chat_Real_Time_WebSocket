@@ -125,8 +125,6 @@ export class ChatService {
                   lastMessage: message.message
                 }
                 this.conversations.push(conversation);
-                //conversation.messages.push(message);
-                //conversation.lastMessage = message.message;
                 })
             }
           }
