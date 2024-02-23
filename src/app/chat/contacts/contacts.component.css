@@ -16,7 +16,6 @@
     width: 100%;
     height: 40px;
     background-color: white;
-
 }
 .search div div img{
     height: 40px;
@@ -124,8 +123,52 @@
     max-width: 70%;
     width: auto;
     height: 100%;
-
     display: block;
     align-items:center;
     justify-content: center;
+}
+@media (max-width: 735px) {
+    .search div{
+        width: 70%;
+    }
+    .contacts{
+        width: 100%;
+        height: 50%;
+        display:flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .contacts .center{
+        width: 100%;
+        height: 90%;
+        overflow-x: auto;
+    }
+    .contact{
+        width: 95%;
+        height: 50px;
+        background-color:white;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin: auto;
+        margin-top: 2px;
+       
+    }
+    .contact .edit{
+        width: 15%;
+    }
+    .contact .edit img{
+        height: 40%;
+    }
+    .contact .delete{
+        font-size: 10px;
+        width: 15%;
+    }
+    .contact .user{
+        width: 70%;
+    }
+    .contact .edit:hover{
+    background-color: rgb(52, 192, 143);
+}
+
 }

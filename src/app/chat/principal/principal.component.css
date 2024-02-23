@@ -1,9 +1,12 @@
 body, html {
-    margin: 0;
-    padding: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
     font-family: Arial, Helvetica, sans-serif;
 }
 .container {
+    position: absolute;
     width: 100vw;
     height: 100vh;
     display: flex; 
@@ -227,8 +230,9 @@ header{
 }
 .back{
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    width: 8%;
+    width: 10%;
     height: 100%;
 }
 .back img{
@@ -266,3 +270,142 @@ input[type=number]::-webkit-outer-spin-button {
     justify-content: center;
     cursor: pointer;
 }
+
+@media (max-width: 735px) {
+   .title{
+    font-size: 10px;
+   }
+   .main{
+    width: 100vw;
+    height: 100vh;
+    }
+    .container{
+        width: 100%;
+        height: 100%;
+    }
+    header{
+        height: 15vh;
+    }
+    .shortcuts{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+    }
+    .shortcuts div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 33.3%;
+        height: 100%;
+    }
+    .shortcuts img{
+        width: 30px;
+    }
+    .chat-info{
+        margin-left: -10%;
+        width: 80%;
+        height: 100%;
+        background-color: #F9F9F9;
+        font-size: 15px;
+    }
+    .profile-pic{
+        height: 40px;
+        width: 40px;
+        border-radius: 30px;
+    }
+    .chat-info h1{
+        font-size: 20px;
+        margin-left: 10px;
+    }
+    .conversations-chat{
+        width: 100%;
+        height: 85vh;
+        display: flex;
+    }
+    .conversations{
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        overflow-y: auto;
+    }
+    .talk{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .talk .image{
+        width: auto;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        height: 100%;
+        margin-right: 10px;
+       }
+    .name-mensage{
+        max-width: 70%;
+        width:auto;
+        height: 100%;
+    }
+    .name-mensage .name{
+        max-width: 100%;
+        width: auto;
+    }
+    .name-mensage .mensage{
+        max-width: 100%;
+        width: auto;
+        height: 35%;
+        font-size: 14px;
+    }
+    .chat{
+        width: 100%;
+        height: 73vh;
+        display: block;
+    }
+    .keyboard{
+        height: 10vh;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.1);
+        background-color: #007FFD;
+        margin-left: 5%;
+        position: fixed;
+        bottom: 2vh;
+    }
+    .keyboard div{
+        height: 10vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .keyboard textarea{
+        height: 10vh;
+        width: 80%;
+        overflow-y: auto;
+        font-size: 15px;
+        padding: 0px;
+    }
+    .keyboard div .send{
+        width: 20%;
+        height: 100%;
+        border-radius: 0px;
+        margin-left: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .chat .messages{
+        height: 100%;
+    }
+    .back{
+        width: 20%;
+    }
+    .back img{
+        margin: auto;
+        width: 60%;
+    }
+}  
