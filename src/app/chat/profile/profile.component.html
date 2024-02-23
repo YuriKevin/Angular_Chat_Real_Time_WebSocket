@@ -14,7 +14,7 @@
                     <h1 *ngIf="contact">{{contact.telephone}}</h1>
                     <h1 *ngIf="userProfile">{{user.telephone}}</h1>
                 </div>
-                <div class="image-profile" >
+                <div class="image-profile">
                     <img *ngIf="contact && contact.photo" src="{{contact.photo}}" alt="User Image">
                     <img *ngIf="contact && !contact.photo" src="../../../assets/images/user.png" alt="User Image">
                     <img *ngIf="userProfile && user.photo" src="{{user.photo}}" alt="User Image">
