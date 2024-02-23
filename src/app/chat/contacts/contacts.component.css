@@ -102,8 +102,8 @@
     height: 100%;
 }
 .contact .user .image img{
-    height: 90%;
-    width: auto;
+    height: 45px;
+    width: 45px;
 }
 .contact .user .name{
     height: 70%;
