@@ -34,16 +34,12 @@
                         </div>
                         <div class="name-mensage">
                             <div class="name">
-                                <h2>{{item.contact.nickname}}</h2>
+                                <h2 title="{{item.contact.nickname}}">{{ item.contact.nickname.length > 20 ? item.contact.nickname.substring(0, 19) + '...' : item.contact.nickname }}</h2>
                             </div>
                             <div class="mensage">
                                 <h4 *ngIf="item.lastMessage">{{ item.lastMessage.length > 11 ? item.lastMessage.substring(0, 11) + '...' : item.lastMessage }}</h4>
                                 <h4 *ngIf="!item.lastMessage">iniciar conversa</h4>
-                                <div class="circle blue"></div>
-                            </div>
-                            <div class="time">
-                                <h6>Online</h6>
-                                <div class="circle green"></div>
+                                <div *ngIf="!item.viewed" class="circle blue"></div>
                             </div>
                         </div>
                     </div>
