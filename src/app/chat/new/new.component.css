@@ -51,9 +51,7 @@
 
 @media (max-width: 735px) {
     .all{
-        width: 100vw;
-        height: 100vh;
-        display: flex;
+        height: 85vh;
     }
     .all .center{
         height: 100%;

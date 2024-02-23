@@ -1,14 +1,9 @@
-body, html {
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    font-family: Arial, Helvetica, sans-serif;
-}
+/* --- estilização do body e html está no arquivo style.css --- */
+
 .container {
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -183,12 +178,10 @@ header{
     max-width: 45%;
     width: auto;
     word-wrap: break-word;
-    min-height: 50px;
+    min-height: 30px;
     font-size: 18px;
     color: white;
     display: block;
-    align-items: center;
-    justify-content: flex-start;
     margin-top: 10px;
     padding: 8px;
     overflow-x: auto;
@@ -213,7 +206,6 @@ header{
     margin-right: 5%;
 }
 .chat-message p{
-    
 }
 .message-width{
     width: 98%;
@@ -221,12 +213,11 @@ header{
     padding: 10px;
 }
 .time2{
-    width: 20%;
+    width: 100%;
     height: 15px;
     display:flex;
-    align-items: center;
-    justify-content:center;
-    margin-left: 80%;
+    align-items:center;
+    justify-content:flex-end;
 }
 .back{
     display: flex;
@@ -273,15 +264,16 @@ input[type=number]::-webkit-outer-spin-button {
 
 @media (max-width: 735px) {
    .title{
-    font-size: 10px;
+        font-size: 10px;
    }
-   .main{
-    width: 100vw;
-    height: 100vh;
-    }
-    .container{
+   .container{
         width: 100%;
         height: 100%;
+        
+    }
+   .main{
+        width: 100vw;
+        height: 100vh;
     }
     header{
         height: 15vh;
@@ -304,17 +296,20 @@ input[type=number]::-webkit-outer-spin-button {
         width: 30px;
     }
     .chat-info{
-        margin-left: -10%;
         width: 80%;
         height: 100%;
         background-color: #F9F9F9;
         font-size: 15px;
+    }
+    .chat-info .profile-pic{
+        margin-left: -10%;
     }
     .profile-pic{
         height: 40px;
         width: 40px;
         border-radius: 30px;
     }
+    
     .chat-info h1{
         font-size: 20px;
         margin-left: 10px;
