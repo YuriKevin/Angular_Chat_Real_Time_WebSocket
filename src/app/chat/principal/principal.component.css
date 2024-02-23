@@ -404,3 +404,7 @@ input[type=number]::-webkit-outer-spin-button {
         width: 60%;
     }
 }  
+/*<div class="time2">
+    <h6>00:00</h6>
+    <div class="circle green"></div>
+</div>*/
