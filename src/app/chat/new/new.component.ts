@@ -38,6 +38,7 @@ export class NewComponent implements OnInit{
       
   }
   add(){
+    this.warningComponent.updateValues("Adicionando contato.", true, false, false, false);
     this.chatService.addContact(this.nickname, this.telephone).subscribe({
       next: (contact: Contact) => {
         this.chatService.addContactInArray(contact, false);
