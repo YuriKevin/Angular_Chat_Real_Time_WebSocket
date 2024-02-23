@@ -31,18 +31,18 @@ export class PrincipalComponent implements OnInit{
 
   ngOnInit(): void {
     this.screenSize();
-    if(!this.user){//primeiro if pra quando o ngOnInit for iniciado pela segunda ou demais vezes
+   //primeiro if pra quando o ngOnInit for iniciado pela segunda ou demais vezes
       this.user = this.chatService.getUser();
       if(!this.user){
         this.router.navigate(['/login']);
       }
-    }
+    
       this.contacts = this.chatService.getContacts();
       this.conversations = this.chatService.getConversations();
       if(!this.chatConversation){
         this.chatConversation = this.chatService.getChatConversation();
       }
-      this.chatConversation = this.conversations[0];
+      /*this.chatConversation = this.conversations[0];*/
   }
 
   ngOnDestroy(): void {
