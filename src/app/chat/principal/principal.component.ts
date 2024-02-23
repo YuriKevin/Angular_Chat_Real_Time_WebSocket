@@ -18,12 +18,19 @@ export class PrincipalComponent implements OnInit{
   contacts:Contact[] = [];
   chatConversation!:Conversation;
   conversations:Conversation[] = [];
+  mobile:boolean = false;
+  desktop:boolean = true;
+
+  //para dispositivos móveis
+  chatVisibility:boolean = false;
+
 
   constructor(private chatService:ChatService, private router:Router){
 
   }
 
   ngOnInit(): void {
+    this.screenSize();
     if(!this.user){//primeiro if pra quando o ngOnInit for iniciado pela segunda ou demais vezes
       this.user = this.chatService.getUser();
       if(!this.user){
@@ -35,6 +42,7 @@ export class PrincipalComponent implements OnInit{
       if(!this.chatConversation){
         this.chatConversation = this.chatService.getChatConversation();
       }
+      this.chatConversation = this.conversations[0];
   }
 
   ngOnDestroy(): void {
@@ -52,5 +60,26 @@ export class PrincipalComponent implements OnInit{
     this.chatConversation = conversation;
     this.chatService.selectChatConversation(conversation);
   }
+
+  screenSize() {
+    const larguraDaTela = window.innerWidth;
+    if (larguraDaTela < 745) {
+      this.mobile = true;
+      this.desktop = false
+    }
+    console.log(this.mobile);
+  }
+  changeToChat(){
+    if(this.mobile){
+      if(this.chatVisibility==true)
+      {
+        this.chatVisibility=false;
+      }
+      else{
+        this.chatVisibility=true
+      }
+    }
+  }
+
 }
 
