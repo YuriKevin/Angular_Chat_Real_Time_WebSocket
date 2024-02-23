@@ -35,7 +35,6 @@ export class NewComponent implements OnInit{
         this.telephone=this.idRoute;
       }
       this.contacts = this.chatService.getContacts();
-      
   }
   add(){
     this.warningComponent.updateValues("Adicionando contato.", true, false, false, false);
@@ -53,8 +52,8 @@ export class NewComponent implements OnInit{
   }
 
     addContact(): void {
-      if(this.nickname.length===0){
-        this.warningComponent.updateValues('Você precisa digitar um nome', false, false, true, false);
+      if(this.nickname.length===0 || this.nickname.length > 25){
+        this.warningComponent.updateValues('Você precisa digitar um nome de 1 até 25 dígitos.', false, false, true, false);
         return;
       }
       const numberString: string = this.telephone.toString();
