@@ -28,7 +28,7 @@
                                 <img class="profile-pic" *ngIf="!item.photo" src="../../../assets/images/user.png" alt="Contact Image">
                             </div>
                             <div class="name-telephone">
-                                <div class="name"><h3>{{item.nickname}}</h3></div>
+                                <div class="name"><h3>{{ item.nickname.length > 20 ? item.nickname.substring(0, 19) + '...' : item.nickname }}</h3></div>
                                 <div class="telephone"><h5>{{item.telephone}}</h5></div>
                             </div>
                         </div>
