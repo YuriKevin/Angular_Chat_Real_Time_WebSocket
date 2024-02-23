@@ -2,10 +2,10 @@
     <div class="container">
         <div class="main">
             <header>
-                <div class="back hover">
-                    <div [routerLink]="['']" class="hover">
+                <div class="back hover" [routerLink]="['']">
+                  
                         <img src="../../../assets/images/back.png" alt="">
-                    </div>
+             
                 </div>
                 <div class="title">
                     <h1>Contatos</h1>
@@ -22,7 +22,7 @@
             </div>
             <div class="contacts">
                 <div class="center">
-                    <div class="contact" *ngFor="let item of searchResults">
+                    <div class="contact" *ngFor="let item of searchResults" title="{{item.nickname}}">
                         <div class="delete" (click)="confirmDelete(item.id)"><h1>X</h1></div>
                         <div class="user" [routerLink]="['/profile/', item.telephone]">
                             <div class="image">
