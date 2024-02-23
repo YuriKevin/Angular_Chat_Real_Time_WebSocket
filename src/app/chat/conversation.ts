@@ -5,4 +5,5 @@ export interface Conversation{
     contact: Contact;
     messages: Message[];
     lastMessage:string;
+    viewed:boolean;
 }
