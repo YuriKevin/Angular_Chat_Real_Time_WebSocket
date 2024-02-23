@@ -46,7 +46,8 @@ export class ChatService {
               const conversation: Conversation = {
                 contact: contact,
                 messages: [], 
-                lastMessage: ''
+                lastMessage: '',
+                viewed: true
               };
               this.conversations.push(conversation);
             });
@@ -115,6 +116,7 @@ export class ChatService {
               conversation.messages.push(message);
               conversation.lastMessage = message.message;
               this.conversations.unshift(conversation);
+              conversation.viewed = false;
             }
             else{
               this.anonymousContact(message.user).subscribe((data: Contact)=>{
@@ -122,7 +124,8 @@ export class ChatService {
                 const conversation: Conversation = {
                   contact: data,
                   messages: [message], 
-                  lastMessage: message.message
+                  lastMessage: message.message,
+                  viewed: false
                 }
                 this.conversations.push(conversation);
                 })
@@ -242,7 +245,8 @@ export class ChatService {
       const conversation: Conversation = {
         contact: contact,
         messages: [], 
-        lastMessage: ''
+        lastMessage: '',
+        viewed: true
       }
         this.conversations.push(conversation);
       }
