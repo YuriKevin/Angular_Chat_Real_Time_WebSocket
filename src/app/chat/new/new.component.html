@@ -2,10 +2,8 @@
     <div class="container">
         <div class="main">
             <header>
-                <div class="back hover">
-                    <div [routerLink]="['']" class="hover">
-                        <img src="../../../assets/images/back.png" alt="">
-                    </div>
+                <div class="back hover" [routerLink]="['']">
+                    <img src="../../../assets/images/back.png" alt="">
                 </div>
                 <div class="title">
                     <h1>Novo Contato</h1>
@@ -13,7 +11,7 @@
             </header>
             <div class="all">
                 <div class="center">
-                    <div class="name">
+                    <div class="box-input">
                         <div>
                             <h3>Nome</h3>
                         </div>
@@ -21,7 +19,7 @@
                             <input class="new-input" type="text" [(ngModel)]="nickname">
                         </div>
                     </div>
-                    <div class="number">
+                    <div class="box-input">
                         <div>
                             <h3>Número</h3>
                         </div>
