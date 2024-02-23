@@ -13,13 +13,13 @@
                         <img src="../../../assets/images/new.png" alt="Add Icon">
                     </div>
                 </div>
-                <div class="chat-info hover" *ngIf="desktop && !chatConversation">
-                    <h1>Seja bem vindo ao Texter</h1>
-                </div>
                 <div class="back hover" *ngIf="mobile && chatVisibility" (click)="changeToChat()">
                     <img src="../../../assets/images/back.png" alt="Back Icon">
                 </div>
-                <div class="chat-info hover" *ngIf="(mobile && chatVisibility) || desktop" [routerLink]="['/profile', chatConversation.contact.telephone]">
+                <div class="chat-info hover" *ngIf="desktop && !chatConversation">
+                    <h1 *ngIf="desktop && !chatConversation">Seja bem vindo ao Texter</h1>
+                </div>
+                <div class="chat-info hover" *ngIf="(mobile && chatVisibility) || desktop && chatConversation" [routerLink]="['/profile', chatConversation.contact.telephone]">
                     <img class="profile-pic" *ngIf="chatConversation && chatConversation.contact.photo" src="{{chatConversation.contact.photo}}" alt="Contact Image">
                     <img class="profile-pic" *ngIf="chatConversation && !chatConversation.contact.photo" src="../../../assets/images/user.png" alt="Contact Image">
                     <h1 >{{chatConversation.contact.nickname}}</h1>
@@ -54,10 +54,6 @@
                         <div class="message-width" *ngFor="let item of chatConversation.messages" [ngClass]="{ 'your': item.user == user.telephone, 'friend' : item.user == chatConversation.contact.telephone}">
                             <div class="chat-message">
                                 <p>{{item.message}}</p>
-                                <div class="time2">
-                                    <h6>00:00</h6>
-                                    <div class="circle green"></div>
-                                </div>
                             </div>
                         </div>
                     </div>
