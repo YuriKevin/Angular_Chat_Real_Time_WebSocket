@@ -55,7 +55,7 @@
                     </div>
                     <div class="keyboard" *ngIf="chatConversation">
                         <div>
-                            <textarea rows="4" maxlength="500" [(ngModel)]="text" (keyup.enter)="sendMessage(chatConversation.contact.telephone)"></textarea>
+                            <textarea rows="4" maxlength="500" spellcheck="false" [(ngModel)]="text" (keyup.enter)="sendMessage(chatConversation.contact.telephone)"></textarea>
                             <div class="send" (click)="sendMessage(chatConversation.contact.telephone)" >
                                 <img src="../../../assets/images/send.png" alt="enviar">
                             </div>

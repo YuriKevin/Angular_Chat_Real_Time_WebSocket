@@ -13,7 +13,7 @@
                 <div>
                     <h3>Pesquisar</h3>
                     <div>
-                        <input [(ngModel)]="text" (keyup.enter)="search()">
+                        <input [(ngModel)]="text" (keyup.enter)="search()" spellcheck="false">
                         <img src="../../../assets/images/search.png" alt="" (click)="search()">
                     </div>
                 </div>
