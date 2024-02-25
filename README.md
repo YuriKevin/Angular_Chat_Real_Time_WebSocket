@@ -15,7 +15,7 @@ Front-end com o framework Angular de um chat em tempo real utilizando WebSocket.
 - Transforma as imagens dos usuários em strings na base 64 para salvar no servidor;
 - Usa recursos importantes do framework Angular, como: manipulação de rotas, uso de diretivas estruturais, uso de Observable, reutilização de um componente como filho de outros componentes e com a possibilidade de um OutPut, importação de bilbiotecas como "HTTP" e "Router", entre outras coisas.
 
-###
+## Como utilizar?
 Para utilizar esta aplicação, execute-a na porta 4200 (padrão do angular) abrindo a pasta no terminal e executando o comando "ng serve".  
 Não se esqueça de executar o back-end junto! [(back-end)](https://github.com/YuriKevin/Spring_Chat_WebSocket)
 
