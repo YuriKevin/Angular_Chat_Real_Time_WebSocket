@@ -1,6 +1,6 @@
 # Angular real time chat
-Front-end com o framework Angular de um chat em tempo real utilizando WebSocket. Esta aplicação complementa uma API construída em Java com Spring Boot que está em outro repositório do perfil: <a href="https://github.com/YuriKevin/Spring_Chat_WebSocket">clique aqui!</a>
-Funcionamento do sistema: <a href="https://youtu.be/-J83J0FT1GU">clique aqui!</a>
+Front-end com o framework Angular de um chat em tempo real utilizando WebSocket. Esta aplicação complementa uma API construída em Java com Spring Boot que está em outro repositório do perfil: <a href="https://github.com/YuriKevin/Spring_Chat_WebSocket" target="_blank">clique aqui!</a> <br>
+Funcionamento do sistema: <a href="https://youtu.be/-J83J0FT1GU" target="_blank">Assista ao vídeo</a>
 
 ## O que este front-end faz?
 - Carrega o usuário e seus contatos através de requisições ao back-end;
