@@ -17,6 +17,9 @@ Front-end com o framework Angular de um chat em tempo real utilizando WebSocket.
 
 ## Como utilizar?
 Para utilizar esta aplicação, execute-a na porta 4200 (padrão do angular) abrindo a pasta no terminal e executando o comando "ng serve".  
-Não se esqueça de executar o back-end junto! [(back-end)](https://github.com/YuriKevin/Spring_Chat_WebSocket)
+Não se esqueça de executar o back-end junto! [(back-end)](https://github.com/YuriKevin/Spring_Chat_real_time_WebSocket)
+
+## Diagrama de Classes
+![Diagrama de classes](chat_diagram.jpg)
 
 ### This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
