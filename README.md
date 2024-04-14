@@ -16,7 +16,8 @@ Front-end com o framework Angular de um chat em tempo real utilizando WebSocket.
 - Usa recursos importantes do framework Angular, como: manipulação de rotas, uso de diretivas estruturais, uso de Observable, reutilização de um componente como filho de outros componentes e com a possibilidade de um OutPut, importação de bilbiotecas como "HTTP" e "Router", entre outras coisas.
 
 ## Como utilizar?
-Para utilizar esta aplicação, execute-a na porta 4200 (padrão do angular) abrindo a pasta no terminal e executando o comando "ng serve".  
+Primeiro, abra o terminal na pasta da aplicação e digite o comando "npm install";
+Depois, para utilizar esta aplicação, execute-a na porta 4200 (padrão do angular) abrindo a pasta no terminal e executando o comando "ng serve".  
 Não se esqueça de executar o back-end junto! [(back-end)](https://github.com/YuriKevin/Spring_Chat_real_time_WebSocket)
 
 ## Diagrama de Classes
